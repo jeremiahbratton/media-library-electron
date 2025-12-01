@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App of holding - Media Catalog</title>
+    
+    <!-- Bulma CSS Framework -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="#">
+                <i class="fas fa-box-open"></i>
+                <span class="ml-2">App of holding</span>
+            </a>
+            
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        
+        <div id="navbarMenu" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" data-view="catalog">
+                    <i class="fas fa-th"></i>
+                    <span class="ml-2">Catalog</span>
+                </a>
+                <a class="navbar-item" data-view="trash">
+                    <i class="fas fa-trash"></i>
+                    <span class="ml-2">Trash</span>
+                </a>
+            </div>
+            
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="field">
+                        <input type="checkbox" id="themeToggle" class="switch is-rounded">
+                        <label for="themeToggle">
+                            <i class="fas fa-moon" id="themeIcon"></i>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content Area -->
+    <section class="section">
+        <div class="container">
+            <!-- Catalog View -->
+            <div id="catalogView" class="view">
+                <!-- Header with Add Button and Search -->
+                <div class="level">
+                    <div class="level-left">
+                        <div class="level-item">
+                            <h1 class="title">Media Catalog</h1>
+                        </div>
+                    </div>
+                    <div class="level-right">
+                        <div class="level-item">
+                            <button class="button is-primary" id="addMediaBtn">
+                                <i class="fas fa-plus"></i>
+                                <span class="ml-2">Add Item</span>
+                            </button>
+                        </div>
+                        <div class="level-item">
+                            <div class="dropdown is-right" id="importExportDropdown">
+                                <div class="dropdown-trigger">
+                                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                                        <i class="fas fa-file-export"></i>
+                                        <span class="ml-2">Import/Export</span>
+                                        <i class="fas fa-angle-down ml-2"></i>
+                                    </button>
+                                </div>
+                                <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                    <div class="dropdown-content">
+                                        <a class="dropdown-item" id="exportJSONBtn">
+                                            <i class="fas fa-file-code"></i>
+                                            <span class="ml-2">Export JSON</span>
+                                        </a>
+                                        <a class="dropdown-item" id="exportCSVBtn">
+                                            <i class="fas fa-file-csv"></i>
+                                            <span class="ml-2">Export CSV</span>
+                                        </a>
+                                        <hr class="dropdown-divider">
+                                        <a class="dropdown-item" id="importJSONBtn">
+                                            <i class="fas fa-file-import"></i>
+                                            <span class="ml-2">Import JSON</span>
+                                        </a>
+                                        <a class="dropdown-item" id="importCSVBtn">
+                                            <i class="fas fa-file-import"></i>
+                                            <span class="ml-2">Import CSV</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Advanced Filter Section -->
+                <div class="box mb-4" id="filterSection">
+                    <h2 class="subtitle mb-4">Filters</h2>
+                    <div class="columns is-multiline">
+                        <div class="column is-one-third">
+                            <div class="field">
+                                <label class="label">Search</label>
+                                <div class="control has-icons-left">
+                                    <input class="input" type="text" id="searchInput" placeholder="Search title or description...">
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-one-third">
+                            <div class="field">
+                                <label class="label">Type</label>
+                                <div class="control">
+                                    <div class="select is-fullwidth">
+                                        <select id="typeFilter">
+                                            <option value="">All Types</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-one-third">
+                            <div class="field">
+                                <label class="label">Minimum Rating</label>
+                                <div class="control">
+                                    <div class="select is-fullwidth">
+                                        <select id="ratingFilter">
+                                            <option value="">Any Rating</option>
+                                            <option value="1">1.0+</option>
+                                            <option value="2">2.0+</option>
+                                            <option value="3">3.0+</option>
+                                            <option value="4">4.0+</option>
+                                            <option value="5">5.0</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-one-third">
+                            <div class="field">
+                                <label class="label">Brand</label>
+                                <div class="control">
+                                    <div class="select is-fullwidth">
+                                        <select id="brandFilter">
+                                            <option value="">All Brands</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-one-third">
+                            <div class="field">
+                                <label class="label">System</label>
+                                <div class="control">
+                                    <div class="select is-fullwidth">
+                                        <select id="systemFilter">
+                                            <option value="">All Systems</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-one-third">
+                            <div class="field">
+                                <label class="label">&nbsp;</label>
+                                <div class="control">
+                                    <button class="button is-fullwidth" id="clearFiltersBtn">
+                                        <i class="fas fa-times"></i>
+                                        <span class="ml-2">Clear Filters</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Media Grid -->
+                <div id="mediaGrid" class="columns is-multiline">
+                    <!-- Media items will be dynamically inserted here -->
+                </div>
+                
+                <!-- Empty State -->
+                <div id="emptyState" class="has-text-centered" style="display: none;">
+                    <i class="fas fa-inbox fa-3x has-text-grey mb-4"></i>
+                    <p class="title is-4 has-text-grey">No items found</p>
+                    <p class="subtitle is-6 has-text-grey">Add your first item to get started!</p>
+                </div>
+            </div>
+            
+            <!-- Trash View -->
+            <div id="trashView" class="view" style="display: none;">
+                <h1 class="title">Trash</h1>
+                <p class="subtitle">Recover or permanently delete items</p>
+                
+                <div id="trashGrid" class="columns is-multiline">
+                    <!-- Deleted items will be dynamically inserted here -->
+                </div>
+                
+                <div id="trashEmptyState" class="has-text-centered" style="display: none;">
+                    <i class="fas fa-trash fa-3x has-text-grey mb-4"></i>
+                    <p class="title is-4 has-text-grey">Trash is empty</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Add/Edit Media Modal -->
+    <div class="modal" id="mediaModal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title" id="modalTitle">Add Media Item</p>
+                <button class="delete" aria-label="close" id="closeModalBtn"></button>
+            </header>
+            <section class="modal-card-body">
+                <form id="mediaForm">
+                    <input type="hidden" id="mediaId">
+                    
+                    <div class="field">
+                        <label class="label">Title <span class="has-text-danger">*</span></label>
+                        <div class="control">
+                            <input class="input" type="text" id="titleInput" required>
+                        </div>
+                    </div>
+                    
+                    <div class="field">
+                        <label class="label">Type <span class="has-text-danger">*</span></label>
+                        <div class="control">
+                            <div class="select is-fullwidth">
+                                <select id="typeInput" required>
+                                    <option value="">Select a type...</option>
+                                    <option value="video_game">Video Game</option>
+                                    <option value="dvd">DVD</option>
+                                    <option value="bluray">Blu-ray</option>
+                                    <option value="board_game">Board Game</option>
+                                    <option value="record">Record</option>
+                                    <option value="comic_book">Comic Book</option>
+                                    <option value="book">Book</option>
+                                    <option value="funko_pop">Funko Pop</option>
+                                    <option value="sneakers">Sneakers</option>
+                                    <option value="coin">Coin</option>
+                                    <option value="trading_card">Trading Card</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="field">
+                        <label class="label">Description</label>
+                        <div class="control">
+                            <textarea class="textarea" id="descriptionInput" rows="3"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="columns">
+                        <div class="column">
+                            <div class="field">
+                                <label class="label">ISBN/SKU</label>
+                                <div class="control">
+                                    <input class="input" type="text" id="isbnSkuInput">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="field">
+                                <label class="label">Quantity</label>
+                                <div class="control">
+                                    <input class="input" type="number" id="quantityInput" min="1" value="1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="field">
+                        <label class="label">Rating</label>
+                        <div class="control">
+                            <div class="rating-stars" id="ratingStars">
+                                <i class="fas fa-star" data-rating="1"></i>
+                                <i class="fas fa-star" data-rating="2"></i>
+                                <i class="fas fa-star" data-rating="3"></i>
+                                <i class="fas fa-star" data-rating="4"></i>
+                                <i class="fas fa-star" data-rating="5"></i>
+                            </div>
+                            <input type="hidden" id="ratingInput">
+                        </div>
+                    </div>
+                    
+                    <div class="columns" id="conditionalFields">
+                        <div class="column">
+                            <div class="field">
+                                <label class="label">Brand</label>
+                                <div class="control">
+                                    <input class="input" type="text" id="brandInput" list="brandList">
+                                    <datalist id="brandList"></datalist>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="field">
+                                <label class="label">Size</label>
+                                <div class="control">
+                                    <input class="input" type="text" id="sizeInput" list="sizeList">
+                                    <datalist id="sizeList"></datalist>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="field">
+                                <label class="label">System</label>
+                                <div class="control">
+                                    <input class="input" type="text" id="systemInput">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="field">
+                        <label class="label">Image</label>
+                        <div class="control">
+                            <div class="file has-name">
+                                <label class="file-label">
+                                    <input class="file-input" type="file" id="imageInput" accept="image/*">
+                                    <span class="file-cta">
+                                        <span class="file-icon">
+                                            <i class="fas fa-upload"></i>
+                                        </span>
+                                        <span class="file-label">Choose image...</span>
+                                    </span>
+                                    <span class="file-name" id="imageFileName">No file selected</span>
+                                </label>
+                            </div>
+                            <button type="button" class="button is-small mt-2" id="selectImageBtn">
+                                <i class="fas fa-folder-open"></i>
+                                <span class="ml-2">Browse Files</span>
+                            </button>
+                            <div id="imagePreview" class="mt-3" style="display: none;">
+                                <figure class="image is-128x128">
+                                    <img id="previewImg" src="" alt="Preview">
+                                </figure>
+                                <button type="button" class="button is-danger is-small mt-2" id="removeImageBtn">
+                                    <i class="fas fa-times"></i>
+                                    <span class="ml-2">Remove Image</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-success" id="saveMediaBtn">Save</button>
+                <button class="button" id="cancelModalBtn">Cancel</button>
+            </footer>
+        </div>
+    </div>
+    
+    <!-- Image Modal -->
+    <div class="modal" id="imageModal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <p class="image">
+                <img id="fullImage" src="" alt="Full size image">
+            </p>
+        </div>
+        <button class="modal-close is-large" aria-label="close" id="closeImageModalBtn"></button>
+    </div>
+    
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="notification-container"></div>
+    
+    <!-- Renderer Script -->
+    <script src="renderer.js"></script>
+</body>
+</html>

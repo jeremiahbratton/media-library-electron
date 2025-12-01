@@ -1,0 +1,276 @@
+/**
+ * Custom Styles for App of holding
+ * 
+ * This file contains custom CSS styles and dark mode theme variables.
+ * Bulma provides the base styling, and we override colors for dark mode.
+ */
+
+/* ============================================================================
+   Theme Variables (Light Mode - Default)
+   ============================================================================ */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #363636;
+    --card-bg: #ffffff;
+    --border-color: #dbdbdb;
+    --hover-bg: #f5f5f5;
+}
+
+/* ============================================================================
+   Dark Mode Theme Variables
+   ============================================================================ */
+[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --card-bg: #2d2d2d;
+    --border-color: #404040;
+    --hover-bg: #3a3a3a;
+}
+
+/* ============================================================================
+   Base Styles
+   ============================================================================ */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ============================================================================
+   Dark Mode Overrides for Bulma Components
+   ============================================================================ */
+[data-theme="dark"] .navbar {
+    background-color: #2d2d2d !important;
+}
+
+[data-theme="dark"] .box {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .card {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .input,
+[data-theme="dark"] .textarea,
+[data-theme="dark"] .select select {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .input:focus,
+[data-theme="dark"] .textarea:focus,
+[data-theme="dark"] .select select:focus {
+    border-color: #3273dc;
+}
+
+[data-theme="dark"] .modal-card {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .modal-card-head,
+[data-theme="dark"] .modal-card-foot {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .dropdown-content {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .dropdown-item {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .dropdown-item:hover {
+    background-color: var(--hover-bg);
+}
+
+/* ============================================================================
+   Theme Toggle Switch
+   ============================================================================ */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.switch label {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.switch label:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+.switch input:checked + label {
+    background-color: #3273dc;
+}
+
+.switch input:checked + label:before {
+    transform: translateX(26px);
+}
+
+/* ============================================================================
+   Media Card Styles
+   ============================================================================ */
+.media-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.media-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.media-card-image {
+    height: 200px;
+    object-fit: cover;
+    background-color: #f0f0f0;
+}
+
+[data-theme="dark"] .media-card-image {
+    background-color: #404040;
+}
+
+.media-card-placeholder {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    color: #999;
+}
+
+[data-theme="dark"] .media-card-placeholder {
+    background-color: #404040;
+    color: #666;
+}
+
+/* ============================================================================
+   Rating Stars
+   ============================================================================ */
+.rating-stars {
+    display: flex;
+    gap: 5px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.rating-stars .fa-star {
+    color: #ddd;
+    transition: color 0.2s ease;
+}
+
+.rating-stars .fa-star:hover,
+.rating-stars .fa-star.active {
+    color: #ffd700;
+}
+
+/* ============================================================================
+   Notification Styles
+   ============================================================================ */
+.notification-container {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    z-index: 1000;
+    max-width: 400px;
+}
+
+.notification-item {
+    margin-bottom: 10px;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ============================================================================
+   Image Modal
+   ============================================================================ */
+#imageModal .modal-content {
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
+#imageModal .modal-content img {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+}
+
+/* ============================================================================
+   Utility Classes
+   ============================================================================ */
+.ml-2 {
+    margin-left: 0.5rem;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem;
+}
+
+/* ============================================================================
+   Responsive Adjustments
+   ============================================================================ */
+@media (max-width: 768px) {
+    .media-card-image,
+    .media-card-placeholder {
+        height: 150px;
+    }
+    
+    .notification-container {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+}

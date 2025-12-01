@@ -1,12 +1,31 @@
 {
-  "name": "media-library",
+  "name": "app-of-holding",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "Desktop application for cataloging the things I purchase instead of spending time with other people.",
+  "main": "electron/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron .",
+    "build": "electron-builder",
+    "test": "playwright test",
+    "postinstall": "electron-rebuild -f -w better-sqlite3"
   },
-  "keywords": [],
+  "keywords": [
+    "electron",
+    "media",
+    "catalog",
+    "collectibles"
+  ],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "dependencies": {
+    "better-sqlite3": "^12.5.0",
+    "bulma": "^1.0.4",
+    "electron": "^39.2.4",
+    "electron-builder": "^26.0.12",
+    "playwright": "^1.57.0"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^3.7.2",
+    "@playwright/test": "^1.57.0"
+  }
 }
