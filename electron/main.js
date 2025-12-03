@@ -370,3 +370,4 @@ ipcMain.handle('fs:fileExists', async (event, filePath) => {
         throw error;
     }
 });
+

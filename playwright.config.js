@@ -29,3 +29,4 @@ module.exports = defineConfig({
     // For now, we'll test the HTML/JS directly. In production, you might
     // want to use spectron or playwright-electron for full Electron testing
 });
+

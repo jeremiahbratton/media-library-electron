@@ -7,7 +7,7 @@
     "start": "electron .",
     "build": "electron-builder",
     "test": "playwright test",
-    "postinstall": "electron-rebuild -f -w better-sqlite3"
+    "postinstall": "electron-builder install-app-deps"
   },
   "keywords": [
     "electron",
@@ -19,13 +19,34 @@
   "license": "ISC",
   "dependencies": {
     "better-sqlite3": "^12.5.0",
-    "bulma": "^1.0.4",
-    "electron": "^39.2.4",
-    "electron-builder": "^26.0.12",
-    "playwright": "^1.57.0"
+    "bulma": "^1.0.4"
   },
   "devDependencies": {
-    "@electron/rebuild": "^3.7.2",
-    "@playwright/test": "^1.57.0"
+    "@playwright/test": "^1.57.0",
+    "electron": "^39.2.4",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.appofholding.media-catalog",
+    "productName": "App of holding",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "electron/**/*",
+      "db/**/*",
+      "src/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
   }
 }

@@ -91,3 +91,4 @@ npx playwright test --debug
 ```
 
 This opens the Playwright Inspector where you can step through tests.
+

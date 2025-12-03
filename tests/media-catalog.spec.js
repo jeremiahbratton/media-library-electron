@@ -217,3 +217,4 @@ test.describe('Media Catalog Application', () => {
         // await expect(page.locator('#typeFilter')).toHaveValue('');
     });
 });
+

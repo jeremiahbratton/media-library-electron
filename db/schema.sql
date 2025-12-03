@@ -51,3 +51,4 @@ CREATE INDEX IF NOT EXISTS idx_media_brand ON media(brand);
 
 -- Create index on size for autocomplete functionality
 CREATE INDEX IF NOT EXISTS idx_media_size ON media(size);
+

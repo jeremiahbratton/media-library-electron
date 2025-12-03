@@ -172,3 +172,4 @@ contextBridge.exposeInMainWorld('electronAPI', {
      */
     fileExists: (filePath) => ipcRenderer.invoke('fs:fileExists', filePath),
 });
+
